@@ -23,7 +23,7 @@ $replacementPattern = '{{ .$1 }}'
 
 $updatedContent = $fileContent -replace $tokenPattern, $replacementPattern
 
-$updatedContent = "{{ with nomadVar ""$NomadVarConfigValuePath"" }}`n" +  $updatedContent + "`n{{ end }}"
+$updatedContent = "{{- with nomadVar ""$NomadVarConfigValuePath"" -}}`n" +  $updatedContent + "`n{{- end -}}"
 $updatedContent | Out-File -Encoding utf8 -FilePath $NewConfigFilePath
 
 
