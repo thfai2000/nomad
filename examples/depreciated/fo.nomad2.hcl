@@ -20,7 +20,7 @@ job "fo-component" {
       
       artifact {
         source      = local.artifact_path
-        destination = "${NOMAD_ALLOC_DIR}\\templates\\${local.service_name}\\files"
+        destination = "${NOMAD_ALLOC_DIR}\\artifacts\\${local.service_name}"
       }
 
       driver = "raw_exec"
@@ -31,9 +31,7 @@ job "fo-component" {
                   "Bypass",
                   "-File",
                   "D:\\hashicorp\\nomad\\bin\\process-templates.ps1",
-                  local.nomadvar_path,
                   local.temp_folder_of_template,
-                  local.temp_list_of_template,
                   ]
       }
     }

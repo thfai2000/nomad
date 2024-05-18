@@ -1,18 +1,18 @@
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Stop
 
 
-$NomadVarConfigValuePath=$args[0]
-$TemplateFolderPath=$args[1]
-$TemplateListFilePath=$args[2]
+# $NomadVarConfigValuePath=$args[0]
+$TemplateFolderPath=$args[0]
+# $TemplateListFilePath=$args[1]
 
 
-Write-Host $NomadVarConfigValuePath
+# Write-Host $NomadVarConfigValuePath
 Write-Host $TemplateFolderPath
-Write-Host $TemplateListFilePath
+# Write-Host $TemplateListFilePath
 
 
 $tokenPattern = "@@@(.*?)@@@"
-$replacementPattern = '{{ .$1 }}'
+$replacementPattern = '{{ env "$1" }}'
 
 $encodedFiles = Get-ChildItem -Path $TemplateFolderPath -File -Recurse | Where-Object {
     !$_.PSIsContainer -and
@@ -41,7 +41,7 @@ $TextFiles | ForEach-Object {
         Write-Host $_.FullName
         $updatedContent = $fileContent -replace $tokenPattern, $replacementPattern
 
-        $updatedContent = "{{- with nomadVar ""$NomadVarConfigValuePath"" -}}`n" +  $updatedContent + "`n{{- end -}}"
+        # $updatedContent = "{{- with nomadVar ""$NomadVarConfigValuePath"" -}}`n" +  $updatedContent + "`n{{- end -}}"
         $updatedContent | Out-File -Encoding utf8 -FilePath $_.FullName
 
         $FullPath = $_.FullName
@@ -55,10 +55,10 @@ $TextFiles | ForEach-Object {
     }
 }
 
-$RelativePathsString = ($TextFiles | ForEach-Object {
-    $_.FullName.Substring($TemplateFolderPath.Length + 1)
-}) -join ","
+# $RelativePathsString = ($TextFiles | ForEach-Object {
+#     $_.FullName.Substring($TemplateFolderPath.Length + 1)
+# }) -join ","
 
-$RelativePathsString | Out-File -FilePath $TemplateListFilePath
+# $RelativePathsString | Out-File -FilePath $TemplateListFilePath
 
 Write-Host "Completed all."

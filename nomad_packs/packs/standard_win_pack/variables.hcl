@@ -1,10 +1,7 @@
-// I'd like to create a Nomad Pack pack.
 // One of the input variable is a nested object with multiple levels like below. 
 // The tasks are multiplied by the number of "machines"
 // "env" is a list of "OS environment" with name and value attributes.
 // Each level of elements has "env" but I want the environment are stacked and included into the task level.
-
-// Please design the HCL of the input variables and the job specification template to me.
 
 // jobs:
 // - name:
@@ -25,6 +22,7 @@ variable "task_types" {
   type = map(object({
     url = string
     driver = string
+    templates = list(string)
     config = object({
       command = string
       args = list(string)
@@ -34,9 +32,12 @@ variable "task_types" {
   default = {
     service1 = {
       url = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+      templates = [
+        "config.xml.tpl"
+      ]
       driver = "raw_exec"
       config = {
-        command = "app/bin/Release/net8.0/win-x64/.net.exe"
+        command = "bin/Release/net8.0/win-x64/.net.exe"
         args = []
       }
     }

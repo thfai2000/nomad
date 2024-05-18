@@ -1,9 +1,4 @@
 
-locals {
-
-a = file("C:/a.txt")
-}
-
 job "fo-component" {
 
 
@@ -16,10 +11,14 @@ job "fo-component" {
       }
 
       template {
-        source        = "local/app/config.xml.tpl"
+        source        = "D:/a.txt"
         destination   = "local/app/config.xml"
       }
 
+      env {
+        a = "5"
+        b = "444"
+      }
 
       driver = "raw_exec"
       config {

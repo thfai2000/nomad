@@ -1,4 +1,4 @@
-# hello_pack
+# standard_win_pack
 
 <!-- Include a brief description of your pack -->
 
@@ -15,7 +15,7 @@ To change the message this server responds with, change the "message" variable
 when running the pack.
 
 ```
-nomad-pack run hello_pack --var message="Hola Mundo!"
+nomad-pack run standard_win_pack --var message="Hola Mundo!"
 ```
 
 This tells Nomad Pack to tweak the `MESSAGE` environment variable that the
@@ -34,7 +34,7 @@ service reads from.
 - `region` (string) - The region where jobs will be deployed
 - `register_service` (bool: true) - If you want to register a Nomad service
   for the job
-- `service_tags` (list of string) - The service tags for the hello_pack application
-- `service_name` (string) - The service name for the hello_pack application
+- `service_tags` (list of string) - The service tags for the standard_win_pack application
+- `service_name` (string) - The service name for the standard_win_pack application
 
 [pack-registry]: https://github.com/hashicorp/nomad-pack-community-registry

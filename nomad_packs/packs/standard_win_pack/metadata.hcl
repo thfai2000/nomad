@@ -2,7 +2,7 @@ app {
   url = ""
 }
 pack {
-  name        = "hello_pack"
+  name        = "standard_win_pack"
   description = ""
   version     = ""
 }
