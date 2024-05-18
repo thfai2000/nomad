@@ -1,3 +1,4 @@
 log/*.log
 data/*
 bin/nomad.exe
+bin/nomad-pack.exe
