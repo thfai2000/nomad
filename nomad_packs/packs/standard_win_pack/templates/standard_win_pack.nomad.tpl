@@ -1,20 +1,18 @@
-[[ $task_types := (var "task_types" . )  ]]
-[[ $env := (var "env" .) ]]
-[[ range $idx, $job := (var "jobs" .) ]]
-
-
+[[- $task_types := (var "task_types" . )  -]]
+[[- $env := (var "env" .) -]]
+[[- range $idx, $job := (var "jobs" .) -]]
 job [[ $job.name | quote ]] {
 
-  [[ range $idx, $group := $job.groups ]]
+  [[- range $idx, $group := $job.groups ]]
 
   group [[ $group.name | quote ]] {
     
-    [[ range $idx_x, $task := $group.tasks ]]
-    [[ range $idx_y, $machine := $task.machines ]]
+    [[- range $idx_x, $task := $group.tasks -]]
+    [[- range $idx_y, $machine := $task.machines -]]
 
-    [[ $pre_task_name := ( (list "init" $task.name $machine.name) | join "-" )  ]]
-    [[ $task_name := ( (list "main" $task.name $machine.name) | join "-" )  ]]
-    [[ $task_type := (index $task_types $task.task_type_name) ]]
+    [[- $pre_task_name := ( (list "init" $task.name $machine.name) | join "-" ) -]]
+    [[- $task_name := ( (list "main" $task.name $machine.name) | join "-" )  -]]
+    [[- $task_type := (index $task_types $task.task_type_name) ]]
 
     task "[[ $pre_task_name ]]" {
       lifecycle {
@@ -63,35 +61,31 @@ job [[ $job.name | quote ]] {
       }
       
       env {
-        
-        [[ range $key, $value := $env ]]
+        [[- range $key, $value := $env ]]
         [[ $key]] = [[ $value | quote ]]
-        [[ end ]]
+        [[ end -]]
 
-        [[ range $key, $value := $job.env ]]
+        [[- range $key, $value := $job.env ]]
         [[ $key]] = [[ $value | quote ]]
-        [[ end ]]
+        [[ end -]]
 
-
-        [[ range $key, $value:= $group.env ]]
+        [[- range $key, $value:= $group.env ]]
         [[ $key]] = [[ $value | quote ]]
-        [[ end ]]
+        [[ end -]]
 
-
-        [[ range $key, $value := $task.env ]]
+        [[- range $key, $value := $task.env ]]
         [[ $key]] = [[ $value | quote ]]
-        [[ end ]]
+        [[ end -]]
 
-        [[ range $key, $value := $machine.env ]]
+        [[- range $key, $value := $machine.env ]]
         [[ $key]] = [[ $value | quote ]]
-        [[ end ]]
-
+        [[ end -]]
       }
     }
-    [[ end ]]
-    [[ end ]]
+    [[- end ]]
+    [[- end ]]
   }
-  [[ end ]]
+  [[- end ]]
 }
 
-[[ end ]]
+[[- end -]]
