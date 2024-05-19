@@ -3,7 +3,6 @@ enable_machine_constraint = false
 
 env = {
 }
-env_text = ""
 
 jobs = [{
     name = "job1"
@@ -23,20 +22,17 @@ jobs = [{
             env = {
                 ENV_C = "task1"
             }
-            env_text = <<-EOH
-            ENV_D="$${ENV_C}hello$${ENV_B}"
-            EOH
             machines = [
             {
                 name = "DIT2_ST01"
                 env = {
-                    ENV_E = "$${ENV_A}_$${ENV_B}_$${ENV_C}_$${ENV_D}_DIT2_ST01"
+                    ENV_D = "DIT2_ST01"
                 }
             },
             {
                 name = "DIT2_HV01"
                 env = {
-                    ENV_F = "$${ENV_A}_$${ENV_B}_$${ENV_C}_$${ENV_D}_DIT2_HV01"
+                    ENV_D = "DIT2_HV01"
                 }
             }
             ]
@@ -51,13 +47,13 @@ jobs = [{
             {
                 name = "DIT2_ST01"
                 env = {
-                    ENV_E = "$${ENV_A}_$${ENV_B}_$${ENV_C}_$${ENV_D}_DIT2_ST01"
+                    ENV_D = "DIT2_ST01"
                 }
             },
             {
                 name = "DIT2_HV01"
                 env = {
-                    ENV_F = "$${ENV_A}_$${ENV_B}_$${ENV_C}_$${ENV_D}_DIT2_HV01"
+                    ENV_D = "DIT2_HV01"
                 }
             }
             ]

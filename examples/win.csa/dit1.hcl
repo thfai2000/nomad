@@ -3,7 +3,7 @@ enable_machine_constraint = true
 
 env = {
 }
-env_text = ""
+env_template = ""
 
 jobs = [{
     name = "job1"

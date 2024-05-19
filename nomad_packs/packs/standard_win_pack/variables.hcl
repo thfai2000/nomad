@@ -25,9 +25,12 @@ variable "enable_machine_constraint" {
 
 variable "env" {
   type = map(string)
+  default = {}
 }
-variable "env_text" {
+
+variable "env_template" {
   type = string
+  default = ""
 }
 
 variable "task_types" { 
@@ -59,21 +62,24 @@ variable "task_types" {
 variable "jobs" {
   type = list(object({
     name = string
+    meta = map(string)
     env = map(string)
-    env_text = string
+
     groups = list(object({
       name = string
+      meta = map(string)
       env = map(string)
-      env_text = string
+
       tasks = list(object({
         name     = string
+        meta = map(string)
         task_type_name = string
         env = map(string)
-        env_text = string
+
         machines = list(object({
           name = string
           env = map(string)
-          env_text = string
+
         }))
 
       }))
@@ -82,39 +88,43 @@ variable "jobs" {
 
   default     = [{
     name = "job1"
+    meta = {
+      // a = 1
+    }
     env = {
       // aaaa = 1
     }
-    env_text = ""
     groups = [
       {
         name = "group1"
+        meta = {
+          // a = 1
+        }
         env = {
           // bbbb = 1
         }
-        env_text = ""
         tasks = [
           {
             name = "task1"
             task_type_name = "service1"
+            meta = {
+
+            }
             env = {
               // cccc = 333
             }
-            env_text = ""
             machines = [
               {
                 name = "DIT2_ST01"
                 env = {
                   // ddd = "st"
                 }
-                env_text = ""
               },
               {
                 name = "DIT2_HV01"
                 env = {
                   // ddd = "hv"
                 }
-                env_text = ""
               }
             ]
           }
