@@ -28,11 +28,6 @@ variable "env" {
   default = {}
 }
 
-variable "env_template" {
-  type = string
-  default = ""
-}
-
 variable "task_types" { 
   type = map(object({
     url = string
