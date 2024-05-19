@@ -50,20 +50,6 @@ job [[ $job.name | quote ]] {
       }
       [[ end ]]
 
-      [[ range $idx_j, $tmpl := $task_type.templates ]]
-      template {
-        source = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
-        destination = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
-      }
-      [[ end]]
-      
-      driver = [[ $task_type.driver | quote ]]
-
-      config {
-        command = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $task_type.config.command) | join "\\" | quote ]]
-        args = [[ $task_type.config.args ]]
-      }
-      
       template {
         env = true
         data = <<EOH
@@ -97,6 +83,21 @@ job [[ $job.name | quote ]] {
         destination = "secrets/file.env"
 
       }
+
+      [[ range $idx_j, $tmpl := $task_type.templates ]]
+      template {
+        source = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
+        destination = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
+      }
+      [[ end]]
+      
+      driver = [[ $task_type.driver | quote ]]
+
+      config {
+        command = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $task_type.config.command) | join "\\" | quote ]]
+        args = [[ $task_type.config.args ]]
+      }
+      
     }
     [[- end ]]
     [[- end ]]

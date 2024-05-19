@@ -1,6 +1,6 @@
 locals {
   service_name = "service_1"
-  artifact_path = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+  artifact_path = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
   list_of_template_files = var.list_of_template_files
 }
 
@@ -30,7 +30,7 @@ job "my-component" {
 
       driver = "raw_exec"
       config {
-        command = "app/bin/Release/net8.0/win-x64/.net.exe"
+        command = "app/bin/Release/net8.0/.net.exe"
         args    = []
       }
       
@@ -58,7 +58,7 @@ job "my-component" {
 
       driver = "raw_exec"
       config {
-        command = "app/bin/Release/net8.0/win-x64/.net.exe"
+        command = "app/bin/Release/net8.0/.net.exe"
         args    = []
       }
     }

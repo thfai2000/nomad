@@ -43,13 +43,13 @@ variable "task_types" {
 
   default = {
     service1 = {
-      url = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+      url = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
       templates = [
         "config.xml.tpl"
       ]
       driver = "raw_exec"
       config = {
-        command = "bin/Release/net8.0/win-x64/.net.exe"
+        command = "bin/Release/net8.0/.net.exe"
         args = []
       }
     }

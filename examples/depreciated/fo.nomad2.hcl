@@ -1,6 +1,6 @@
 locals {
   service_name = "service_1"
-  artifact_path = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+  artifact_path = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
 
   nomadvar_path = "app-config/${local.service_name}/values"
   temp_folder_of_template = "${NOMAD_ALLOC_DIR}\\templates\\${local.service_name}\\files"
@@ -39,7 +39,7 @@ job "fo-component" {
 
     task "service-task" {
       artifact {
-        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
         destination = "local/app"
       }
 
@@ -58,7 +58,7 @@ job "fo-component" {
 
       driver = "raw_exec"
       config {
-        command = "app/bin/Release/net8.0/win-x64/.net.exe"
+        command = "app/bin/Release/net8.0/.net.exe"
         args    = []
       }
     }

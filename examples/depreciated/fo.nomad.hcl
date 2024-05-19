@@ -9,7 +9,7 @@ job "fo-component" {
       }
       
       artifact {
-        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
         destination = "local/app"
       }
 
@@ -32,7 +32,7 @@ job "fo-component" {
 
     task "service-task" {
       artifact {
-        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.0/artifact-1.0.zip"
+        source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
         destination = "local/app"
       }
 
@@ -48,7 +48,7 @@ job "fo-component" {
 
       driver = "raw_exec"
       config {
-        command = "app/bin/Release/net8.0/win-x64/.net.exe"
+        command = "app/bin/Release/net8.0/.net.exe"
         args    = []
       }
     }
