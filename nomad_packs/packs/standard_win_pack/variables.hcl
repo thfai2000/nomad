@@ -14,11 +14,23 @@
 //     - machines:
 //       - env:
 
-variable "env" {
+variable "namespace" {
   type = map(string)
 }
 
-variable "task_types" {
+variable "enable_machine_constraint" {
+  type = bool
+  default = true
+}
+
+variable "env" {
+  type = map(string)
+}
+variable "env_text" {
+  type = string
+}
+
+variable "task_types" { 
   type = map(object({
     url = string
     driver = string
@@ -48,16 +60,20 @@ variable "jobs" {
   type = list(object({
     name = string
     env = map(string)
+    env_text = string
     groups = list(object({
       name = string
       env = map(string)
+      env_text = string
       tasks = list(object({
         name     = string
         task_type_name = string
         env = map(string)
+        env_text = string
         machines = list(object({
           name = string
           env = map(string)
+          env_text = string
         }))
 
       }))
@@ -67,33 +83,38 @@ variable "jobs" {
   default     = [{
     name = "job1"
     env = {
-      aaaa = 1
+      // aaaa = 1
     }
+    env_text = ""
     groups = [
       {
         name = "group1"
         env = {
-          bbbb = 1
+          // bbbb = 1
         }
+        env_text = ""
         tasks = [
           {
             name = "task1"
             task_type_name = "service1"
             env = {
-              cccc = 333
+              // cccc = 333
             }
+            env_text = ""
             machines = [
               {
                 name = "DIT2_ST01"
                 env = {
-                  ddd = "st"
+                  // ddd = "st"
                 }
+                env_text = ""
               },
               {
                 name = "DIT2_HV01"
                 env = {
-                  ddd = "hv"
+                  // ddd = "hv"
                 }
+                env_text = ""
               }
             ]
           }

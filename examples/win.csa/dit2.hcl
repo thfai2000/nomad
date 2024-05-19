@@ -1,6 +1,9 @@
-env = {
+namespace = "dit2"
+enable_machine_constraint = true
 
+env = {
 }
+env_text = ""
 
 jobs = [{
     name = "job1"
@@ -12,6 +15,7 @@ jobs = [{
         name = "group1"
         env = {
             bbbb = 1
+            bbb2 = 2
         }
         tasks = [
             {
@@ -19,7 +23,12 @@ jobs = [{
             task_type_name = "service1"
             env = {
                 cccc = 333
+                fff = "{{ add 4 5}}"
+                wwww = "hello world"
             }
+            env_text = <<-EOH
+            combined_env="$${aaaa}hello"
+            EOH
             machines = [
             {
                 name = "DIT2_ST01"

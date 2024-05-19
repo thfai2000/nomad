@@ -1,6 +1,9 @@
-env = {
+namespace = "dit1"
+enable_machine_constraint = true
 
+env = {
 }
+env_text = ""
 
 jobs = [{
     name = "job1"
@@ -39,5 +42,3 @@ jobs = [{
         }
     ]
 }]
-
-
