@@ -14,21 +14,12 @@ job "fo-component" {
     task "service-task" {
 
       meta {
-        C = "c"
+        C = "c ${env["NOMAD_META_A"]}"
       }
 
       artifact {
         source      = "https://github.com/thfai2000/jenkins-pipelines/releases/download/1.1/artifact-1.1.zip"
         destination = "local/app"
-      }
-
-      template {
-        env = true
-        data =<<EOH
-        ENV_C="c"
-        ENV_F={{ env "ENV_A" }}-x-{{ env "ENV_B" }}
-        EOH
-        destination = "secrets/file1.env"
       }
 
 
@@ -53,11 +44,6 @@ job "fo-component" {
 </xml>
         EOH
         destination   = "local/app/config.new.xml"
-      }
-
-      env {
-        ENV_A = "a"
-        ENV_D = "${env["NOMAD_META_A"]}-${env["NOMAD_META_B"]}-${env["NOMAD_META_C"]}"
       }
 
 

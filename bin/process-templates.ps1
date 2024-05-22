@@ -2,14 +2,15 @@ $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Stop
 
 
 # $NomadVarConfigValuePath=$args[0]
-$TemplateFolderPath=$args[0]
+$TemplateFolderPath=$Env:COMPONENT_BINARY_DIR
 # $TemplateListFilePath=$args[1]
 
 
 # Write-Host $NomadVarConfigValuePath
+Write-Host "process-templates started"
 Write-Host $TemplateFolderPath
 # Write-Host $TemplateListFilePath
-
+Write-Host "process-templates 2"
 
 $tokenPattern = "@@@(.*?)@@@"
 $replacementPattern = '{{ env "$1" }}'
@@ -29,6 +30,7 @@ $encodedFiles = Get-ChildItem -Path $TemplateFolderPath -File -Recurse | Where-O
 }
 
 $TextFiles = $encodedFiles | Where-Object {
+    Write-Host $_.FullName
     $fileContent = Get-Content -Path $_.FullName
     $fileContent -match $tokenPattern
 }
@@ -61,4 +63,3 @@ $TextFiles | ForEach-Object {
 
 # $RelativePathsString | Out-File -FilePath $TemplateListFilePath
 
-Write-Host "Completed all."

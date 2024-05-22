@@ -1,7 +1,6 @@
 [[- $task_types := (var "task_types" . )  -]]
 [[- $enable_machine_constraint := (var "enable_machine_constraint" .) -]]
 [[- $env := (var "env" .) -]]
-[[- $env_template := (var "env_template" .) -]]
 [[- range $idx, $job := (var "jobs" .) -]]
 job [[ $job.name | quote ]] {
 
@@ -47,8 +46,10 @@ job [[ $job.name | quote ]] {
                   "-ExecutionPolicy",
                   "Bypass",
                   "-File",
-                  "D:\\hashicorp\\nomad\\bin\\process-templates.ps1",
-                  "${NOMAD_ALLOC_DIR}\\artifacts\\[[ $task_name ]]"
+                  "D:\\hashicorp\\nomad\\bin\\init-task.ps1",
+                  "${NOMAD_ALLOC_DIR}\\artifacts\\[[ $task_name ]]",
+                  [[ if $task_type.scripts_before_install ]][[ $task_type.scripts.before_install ]][[ else ]]"scripts\\before_install.ps1"[[ end ]],
+                  [[ if $task_type.scripts_install ]][[ $task_type.scripts.install ]][[ else ]]"scripts\\install.ps1"[[ end ]]
                   ]
       }
     }
