@@ -49,9 +49,10 @@ job "fo-component" {
 
       driver = "raw_exec"
       config {
-        command = "local/app/bin/Release/net8.0/.net.exe"
+        // command = "local/app/bin/Release/net8.0/.net.exe"
+        command = "powershell.exe"
+        args = ["-Command", "Write-Host 'AAAAA'; Write-Host ${ENV_E}; Start-Sleep -Seconds 30"]
       }
-
     }
 
   }

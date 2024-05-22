@@ -48,8 +48,8 @@ job [[ $job.name | quote ]] {
                   "-File",
                   "D:\\hashicorp\\nomad\\bin\\init-task.ps1",
                   "${NOMAD_ALLOC_DIR}\\artifacts\\[[ $task_name ]]",
-                  [[ if $task_type.scripts_before_install ]][[ $task_type.scripts.before_install ]][[ else ]]"scripts\\before_install.ps1"[[ end ]],
-                  [[ if $task_type.scripts_install ]][[ $task_type.scripts.install ]][[ else ]]"scripts\\install.ps1"[[ end ]]
+                  [[ if $task_type.script_before_install ]][[ $task_type.script_before_install | quote ]][[ else ]]""[[ end ]],
+                  [[ if $task_type.script_install ]][[ $task_type.script_install | quote ]][[ else ]]""[[ end ]]
                   ]
       }
     }
@@ -94,16 +94,25 @@ job [[ $job.name | quote ]] {
 
       [[ range $idx_j, $tmpl := $task_type.templates ]]
       template {
+        error_on_missing_key = true
         source = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
         destination = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $tmpl) | join "\\" | quote ]]
       }
       [[ end]]
+
+      [[ if $task_type.env_template ]]
+      template {
+        env = true
+        data = [[ $task_type.env_template | quote ]]
+        destination = "secrets/1.env"
+      }
+      [[ end ]]
       
       driver = [[ $task_type.driver | quote ]]
 
       config {
         command = [[ (list "${NOMAD_ALLOC_DIR}\\artifacts" $task_name $task_type.config.command) | join "\\" | quote ]]
-        args = [[ $task_type.config.args ]]
+        args = [[ $task_type.config.args | toJson ]]
       }
       
     }

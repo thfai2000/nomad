@@ -7,19 +7,23 @@ $SCRIPT_INSTALL= $args[2]
 [System.Environment]::SetEnvironmentVariable("COMPONENT_BINARY_DIR", $COMPONENT_BINARY_DIR, [System.EnvironmentVariableTarget]::Process)
 
 
-if (Test-Path -Path "$COMPONENT_BINARY_DIR\$SCRIPT_BEFORE_INSTALL") {
-    & "$COMPONENT_BINARY_DIR\$SCRIPT_BEFORE_INSTALL"
-    Write-Host "process-before-install completed."
+if (-not [string]::IsNullOrEmpty($SCRIPT_BEFORE_INSTALL)) {
+$beforeInstallScriptPath = Join-Path -Path $COMPONENT_BINARY_DIR -ChildPath "process-before-install.ps1"
+$SCRIPT_BEFORE_INSTALL | Out-File -FilePath $beforeInstallScriptPath -Encoding utf8
+& $beforeInstallScriptPath
+Write-Host "process-before-install completed."
 } else {
-    Write-Host "Skipping process-before-install script as it does not exist."
+Write-Host "Skipping process-before-install script as it does not exist."
 }
 
 D:\hashicorp\nomad\bin\process-templates.ps1
 Write-Host "process-templates completed."
 
-if (Test-Path -Path "$COMPONENT_BINARY_DIR\$SCRIPT_INSTALL") {
-    & "$COMPONENT_BINARY_DIR\$SCRIPT_INSTALL"
-    Write-Host "process-install completed."
+if (-not [string]::IsNullOrEmpty($SCRIPT_INSTALL)) {
+$installScriptPath = Join-Path -Path $COMPONENT_BINARY_DIR -ChildPath "process-install.ps1"
+$SCRIPT_INSTALL | Out-File -FilePath $installScriptPath -Encoding utf8
+& $installScriptPath
+Write-Host "process-install completed."
 } else {
-    Write-Host "Skipping process-install script as it does not exist."
+Write-Host "Skipping process-install script as it does not exist."
 }

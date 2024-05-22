@@ -1,4 +1,4 @@
-namespace = "dit2"
+namespace = "DIT1"
 enable_machine_constraint = false
 
 env = {
@@ -21,18 +21,19 @@ jobs = [{
             task_type_name = "service1"
             env = {
                 ENV_C = "task1"
+                ENV_APPD_ENABLED = true
             }
             machines = [
             {
-                name = "DIT2_ST01"
+                name = "DIT1_ST01"
                 env = {
-                    ENV_D = "DIT2_ST01"
+                    ENV_D = "DIT1_ST01"
                 }
             },
             {
-                name = "DIT2_HV01"
+                name = "DIT1_HV01"
                 env = {
-                    ENV_D = "DIT2_HV01"
+                    ENV_D = "DIT1_HV01"
                 }
             }
             ]
@@ -42,18 +43,19 @@ jobs = [{
             task_type_name = "service2"
             env = {
                 ENV_C = "task2"
+                ENV_APPD_ENABLED = false
             }
             machines = [
             {
-                name = "DIT2_ST01"
+                name = "DIT1_ST01"
                 env = {
-                    ENV_D = "DIT2_ST01"
+                    ENV_D = "DIT1_ST01"
                 }
             },
             {
-                name = "DIT2_HV01"
+                name = "DIT1_HV01"
                 env = {
-                    ENV_D = "DIT2_HV01"
+                    ENV_D = "DIT1_HV01"
                 }
             }
             ]

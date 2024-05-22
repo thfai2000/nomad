@@ -33,6 +33,9 @@ variable "task_types" {
     url = string
     driver = string
     templates = list(string)
+    script_before_install = string
+    script_install = string
+    env_template = string
     config = object({
       command = string
       args = list(string)
@@ -46,6 +49,9 @@ variable "task_types" {
         "config.xml.tpl"
       ]
       driver = "raw_exec"
+      script_before_install = ""
+      script_install = ""
+      env_template = ""
       config = {
         command = "bin/Release/net8.0/.net.exe"
         args = []

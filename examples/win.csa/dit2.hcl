@@ -21,6 +21,7 @@ jobs = [{
             task_type_name = "service1"
             env = {
                 ENV_C = "task1"
+                ENV_APPD_ENABLED = true
             }
             machines = [
             {
@@ -42,6 +43,7 @@ jobs = [{
             task_type_name = "service2"
             env = {
                 ENV_C = "task2"
+                ENV_APPD_ENABLED = false
             }
             machines = [
             {
