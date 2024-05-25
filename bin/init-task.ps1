@@ -1,5 +1,7 @@
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Stop
 
+Write-Host "NOMAD_HOME=$ENV:NOMAD_HOME"
+
 $COMPONENT_BINARY_DIR =$args[0]
 $SCRIPT_BEFORE_INSTALL= $args[1]
 $SCRIPT_INSTALL= $args[2]
@@ -16,7 +18,7 @@ Write-Host "process-before-install completed."
 Write-Host "Skipping process-before-install script as it does not exist."
 }
 
-D:\hashicorp\nomad\bin\process-templates.ps1
+& $ENV:NOMAD_HOME\bin\process-templates.ps1
 Write-Host "process-templates completed."
 
 if (-not [string]::IsNullOrEmpty($SCRIPT_INSTALL)) {

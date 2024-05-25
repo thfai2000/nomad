@@ -31,4 +31,4 @@ Write-Host "======= App Config File ====="
 Write-Host $updatedContent
 Write-Host "============================="
 
-D:/hashicorp/nomad/bin/nomad.exe var put -force $NomadVarConfigTemplatePath content="$updatedContent"
+& $ENV:NOMAD_HOME/bin/nomad.exe var put -force $NomadVarConfigTemplatePath content="$updatedContent"

@@ -30,7 +30,7 @@ job "fo-component" {
                   "-ExecutionPolicy",
                   "Bypass",
                   "-File",
-                  "D:\\hashicorp\\nomad\\bin\\process-templates.ps1",
+                  "${NOMAD_HOME}\\bin\\process-templates.ps1",
                   local.temp_folder_of_template,
                   ]
       }

@@ -20,7 +20,7 @@ job "fo-component" {
                   "-ExecutionPolicy",
                   "Bypass",
                   "-File",
-                  "D:\\hashicorp\\nomad\\bin\\process-app-config.ps1",
+                  "${NOMAD_HOME}\\bin\\process-app-config.ps1",
                   "app-config/service-1/templates",
                   "app-config/service-1/values",
                   "${NOMAD_TASK_DIR}\\app\\config.xml.tpl",

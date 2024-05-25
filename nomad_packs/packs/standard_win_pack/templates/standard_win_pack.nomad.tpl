@@ -46,7 +46,7 @@ job [[ $job.name | quote ]] {
                   "-ExecutionPolicy",
                   "Bypass",
                   "-File",
-                  "D:\\hashicorp\\nomad\\bin\\init-task.ps1",
+                  "${NOMAD_HOME}\\bin\\init-task.ps1",
                   "${NOMAD_ALLOC_DIR}\\artifacts\\[[ $task_name ]]",
                   [[ if $task_type.script_before_install ]][[ $task_type.script_before_install | quote ]][[ else ]]""[[ end ]],
                   [[ if $task_type.script_install ]][[ $task_type.script_install | quote ]][[ else ]]""[[ end ]]

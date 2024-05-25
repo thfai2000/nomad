@@ -1,2 +1,4 @@
+
 sc.exe delete "Nomad"
-sc.exe create "Nomad" binPath="D:\hashicorp\nomad\bin\nomad.exe agent -config=D:\hashicorp\nomad\config\nomad.hcl" start= auto
+[Environment]::SetEnvironmentVariable('NOMAD_HOME','D:\hashicorp\nomad','Machine')
+sc.exe create "Nomad" binPath="$ENV:NOMAD_HOME\bin\nomad.exe agent -config=$ENV:NOMAD_HOME\config\nomad.hcl" start= auto
